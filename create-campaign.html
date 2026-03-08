@@ -2,556 +2,353 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    
-    <!-- SECURITY UPGRADES - Netlify Ready! 🚀 -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:; script-src * 'unsafe-inline' 'unsafe-eval' data: blob:; frame-src * data: blob:; connect-src * 'unsafe-inline';">
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SKYTUBE - Create Campaign</title>
     <style>
-        /* Copy all the same styles from index.html here */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
-            min-height: 100vh;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding-bottom: 20px;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        .glass, .glass-nav, .glass-container {
+        .glass {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        }
-
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.98);
-            padding: 8px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            min-height: 50px;
-        }
-
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        .logo-square.small {
-            width: 24px;
-            height: 24px;
-            background: white;
-            border-radius: 5px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-right: 5px;
-        }
-
-        .logo-rectangle.green {
-            width: 9px;
-            height: 14px;
-            background: #00ff88;
-            position: absolute;
-        }
-
-        .total-clients-small {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 3px 8px;
             border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .back-link {
-            color: #333;
-            text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            background: rgba(255,255,255,0.2);
-        }
-
-        .coins-display {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 12px;
-            white-space: nowrap;
-            margin-right: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
         .container {
-            max-width: 800px;
-            margin: 15px auto;
-            padding: 0 15px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .campaign-info {
+        h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+        }
+
+        .coins {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-card {
+            background: white;
             padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 12px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .info-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
-        .form-group label {
+        label {
             display: block;
-            margin-bottom: 5px;
-            color: #333;
-            font-weight: 500;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        textarea, input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
             font-size: 14px;
         }
 
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
+        textarea {
+            min-height: 150px;
+            font-family: monospace;
+        }
+
+        button {
             width: 100%;
-            padding: 10px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
         }
 
         .btn-primary {
-            width: 100%;
-            padding: 12px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
         }
 
-        .btn-secondary {
-            padding: 8px 16px;
+        .btn-preview {
             background: #f0f0f0;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        .btn-small {
-            padding: 4px 8px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .warning {
-            color: #e74c3c;
-            font-size: 11px;
-        }
-
-        /* Preview styles */
-        .preview-section {
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-        }
-
-        .preview-title {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 10px;
             color: #333;
         }
 
-        .live-preview {
-            min-height: 300px;
-            background: white;
-            border-radius: 8px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #667eea;
-        }
-
-        .ad-format-badge {
+        .badge {
             display: inline-block;
-            padding: 4px 8px;
-            background: #f0f0f0;
-            border-radius: 4px;
-            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 12px;
             margin-right: 5px;
         }
 
-        .detected-format {
-            padding: 8px;
-            background: #e8f4fd;
-            border-radius: 6px;
-            margin-bottom: 10px;
-            font-size: 12px;
-        }
-
-        .script-input-container {
-            position: relative;
-        }
-
-        .script-example {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            font-size: 10px;
-            color: #667eea;
-            cursor: pointer;
-            background: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            border: 1px solid #667eea;
-        }
-
-        .format-indicator {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-
-        .ads-assistant {
-            margin-bottom: 15px;
-            text-align: center;
-            font-size: 13px;
-        }
-
-        .ads-assistant a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        /* NEW: Domain Status Badge */
-        .domain-badge {
-            background: linear-gradient(135deg, #00b09b, #96c93d);
+        .badge-blue {
+            background: #667eea;
             color: white;
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 11px;
-            font-weight: bold;
+        }
+
+        .badge-green {
+            background: #27ae60;
+            color: white;
+        }
+
+        /* THE FIX - Preview container */
+        .preview-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #667eea;
+        }
+
+        #adPreviewFrame {
+            width: 100%;
+            min-height: 350px;
+            border: none;
+            border-radius: 8px;
+            background: #f5f7ff;
+        }
+
+        .example-link {
+            color: #667eea;
+            text-decoration: underline;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 5px;
             display: inline-block;
-            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <!-- Simple Navigation -->
-    <nav class="glass-nav">
-        <div class="nav-left">
-            <div class="nav-logo">
-                <div class="logo-square small white">
-                    <div class="logo-rectangle green"></div>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="nav-bar">
+            <div style="font-weight: bold;">SKYTUBE</div>
+            <div style="display: flex; gap: 10px;">
+                <span class="coins">🪙 <span id="userCoins">0</span></span>
+                <a href="index.html" style="color: #667eea;">← Back</a>
+            </div>
+        </div>
+
+        <h1>🚀 Create Campaign</h1>
+
+        <!-- Stats -->
+        <div class="info-grid">
+            <div class="info-card">
+                <div style="font-size: 12px; color: #666;">Your Coins</div>
+                <div class="info-value" id="availableCoins">0</div>
+            </div>
+            <div class="info-card">
+                <div style="font-size: 12px; color: #666;">Network</div>
+                <div class="info-value" id="networkSize">0</div>
+            </div>
+            <div class="info-card">
+                <div style="font-size: 12px; color: #666;">Max Views</div>
+                <div class="info-value" id="maxViews">0</div>
+            </div>
+        </div>
+
+        <!-- Main Form -->
+        <div class="glass">
+            <form id="campaignForm">
+                <div class="form-group">
+                    <label>Campaign Type</label>
+                    <select id="campaignType">
+                        <option value="ad">📺 Advertisement</option>
+                        <option value="banner">🖼️ Banner</option>
+                    </select>
                 </div>
-                <span style="font-size: 14px;">SKYTUBE</span>
-            </div>
-            <div class="total-clients-small">
-                👥 <span id="navTotalClients">0</span>
-            </div>
-        </div>
-        
-        <div style="display: flex; gap: 10px; align-items: center;">
-            <div class="coins-display">🪙 <span id="userCoins">0</span></div>
-            <a href="index.html" class="back-link">← Back</a>
-        </div>
-    </nav>
 
-    <main class="container">
-        <h1 style="font-size: 20px; margin-bottom: 15px;">Create New Campaign</h1>
-        
-        <!-- NEW: Domain Status -->
-        <div style="text-align: center; margin-bottom: 15px;">
-            <span class="domain-badge" id="domainBadge">🌐 Live Domain Mode</span>
-        </div>
-        
-        <div class="campaign-info glass">
-            <p style="font-size: 14px;">📊 Available Coins: <strong id="availableCoins">0</strong></p>
-            <p style="font-size: 14px;">👥 Total Clients: <strong id="totalClientsDisplay">0</strong></p>
-            <p style="font-size: 14px;">🎯 Max Views: <strong id="maxViews">0</strong></p>
-        </div>
-
-        <form id="campaignForm" class="glass" style="padding: 15px;">
-            <div class="form-group">
-                <label style="font-size: 14px;">Campaign Type</label>
-                <select id="campaignType" required onchange="detectAdFormat()">
-                    <option value="advertisement">Advertisement Script</option>
-                    <option value="banner">Banner Script</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label style="font-size: 14px;">Ad Script</label>
-                <div class="script-input-container">
-                    <textarea id="campaignScript" rows="6" placeholder="Paste your ad script here..." required oninput="updateLivePreview()"></textarea>
-                    <span class="script-example" onclick="insertExampleScript()">📋 Insert Example</span>
+                <div class="form-group">
+                    <label>Ad Script</label>
+                    <textarea id="campaignScript" rows="6" placeholder="Paste your ad script here..."></textarea>
+                    <span class="example-link" onclick="insertExample()">📋 Insert example Adsterra script</span>
                 </div>
-                <small class="warning">⚠️ Script will be automatically wrapped in proper HTML structure</small>
-            </div>
 
-            <!-- Ad Format Detection -->
-            <div id="formatDetection" class="detected-format" style="display: none;">
-                <strong>📐 Detected Format:</strong> <span id="detectedDimensions"></span>
-                <div class="format-indicator" id="formatIndicators"></div>
-            </div>
-
-            <!-- Live Preview Section - NOW WITH BETTER SECURITY -->
-            <div class="preview-section glass">
-                <div class="preview-title">🔍 Live Preview - How your ad will appear:</div>
-                <div id="livePreview" class="live-preview">
-                    <p style="color: #999; font-size: 13px;">Paste your ad script above to see live preview</p>
+                <!-- Format Badges -->
+                <div id="formatBadges" style="margin: 10px 0; display: none;">
+                    <span class="badge badge-blue" id="networkBadge">Adsterra</span>
+                    <span class="badge badge-green" id="sizeBadge">300x250</span>
                 </div>
-                <p style="font-size: 11px; color: #27ae60; margin-top: 8px; text-align: center;">
-                    ✅ Secure sandbox mode - Ads will load on your domain
-                </p>
-            </div>
 
-            <div class="form-group">
-                <label style="font-size: 14px;">Requested Views (Max: <span id="maxViewsInput">0</span>)</label>
-                <input type="number" id="requestedViews" min="1" max="0" value="1" required oninput="updateTotalCost()">
-            </div>
+                <!-- THE FIXED PREVIEW - Using blob URL instead of srcdoc -->
+                <div class="preview-container">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="font-weight: bold;">🔍 Live Preview</span>
+                        <button type="button" onclick="updatePreview()" style="width: auto; padding: 5px 15px; margin: 0;">Refresh</button>
+                    </div>
+                    <iframe id="adPreviewFrame" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals"></iframe>
+                </div>
 
-            <div class="form-group">
-                <label style="font-size: 14px;">Total Cost: <span id="totalCost">1</span> Coins</label>
-            </div>
+                <div class="form-group">
+                    <label>Views (Max: <span id="maxViewsInput">0</span>)</label>
+                    <input type="number" id="requestedViews" min="1" value="1">
+                </div>
 
-            <div class="ads-assistant">
-                <p>Don't have an Ads account? <a href="index.html#platforms" onclick="window.opener?window.opener.showPage('platforms'):window.location='index.html'">Create one here</a></p>
-            </div>
+                <div class="form-group">
+                    <label>Total Cost: <span id="totalCost">1</span> Coins</label>
+                </div>
 
-            <button type="submit" class="btn-primary">🚀 Launch Campaign</button>
-        </form>
-    </main>
+                <button type="button" class="btn-preview" onclick="updatePreview()">🔄 Update Preview</button>
+                <button type="submit" class="btn-primary">✅ Launch Campaign</button>
+            </form>
+        </div>
+    </div>
 
     <script>
-        // Get user data from localStorage
-        function getUserData() {
-            const storedUser = localStorage.getItem('skytube_user');
-            if (storedUser) {
-                return JSON.parse(storedUser);
-            }
-            return null;
+        // Get user data
+        function getUser() {
+            return JSON.parse(localStorage.getItem('skytube_user') || 'null');
         }
 
-        // Check if user is logged in
-        const user = getUserData();
-        if (!user) {
-            window.location.href = 'index.html';
+        // Update UI
+        function updateUI() {
+            const user = getUser();
+            if (!user) window.location.href = 'index.html';
+
+            const total = parseInt(localStorage.getItem('skytube_totalClients')) || 2;
+            
+            document.getElementById('userCoins').textContent = user.coins;
+            document.getElementById('availableCoins').textContent = user.coins;
+            document.getElementById('networkSize').textContent = total;
+            document.getElementById('maxViews').textContent = total;
+            document.getElementById('maxViewsInput').textContent = total;
+            
+            const views = document.getElementById('requestedViews');
+            views.max = total;
+            views.value = Math.min(1, total);
+            document.getElementById('totalCost').textContent = views.value;
         }
 
-        // NEW: Detect if on localhost or live domain
-        function checkDomain() {
-            const hostname = window.location.hostname;
-            const badge = document.getElementById('domainBadge');
-            
-            if (hostname === 'localhost' || hostname === '127.0.0.1') {
-                badge.style.background = 'linear-gradient(135deg, #ff6b6b, #ee5253)';
-                badge.innerHTML = '⚠️ Localhost Mode - Preview Only';
-            } else {
-                badge.style.background = 'linear-gradient(135deg, #00b09b, #96c93d)';
-                badge.innerHTML = '🌐 Live Domain - Ads Will Load';
-            }
-        }
-
-        // Update displays
-        function updateDisplays() {
-            const user = getUserData();
-            if (user) {
-                document.getElementById('userCoins').textContent = user.coins;
-                document.getElementById('availableCoins').textContent = user.coins;
-                
-                // Get total clients from localStorage or parent
-                const totalClients = parseInt(localStorage.getItem('skytube_totalClients')) || 2;
-                document.getElementById('navTotalClients').textContent = totalClients;
-                document.getElementById('totalClientsDisplay').textContent = totalClients;
-                document.getElementById('maxViews').textContent = totalClients;
-                document.getElementById('maxViewsInput').textContent = totalClients;
-                
-                const viewsInput = document.getElementById('requestedViews');
-                viewsInput.max = totalClients;
-                viewsInput.value = Math.min(1, totalClients);
-            }
-        }
-
-        // Smart Ad Script Wrapper Function - ENHANCED FOR LIVE DOMAIN
-        function wrapAdScript(script, type) {
-            let cleanScript = script.trim();
-            
-            // Detect ad network format
-            const isAdsterra = cleanScript.includes('atOptions') && cleanScript.includes('highperformanceformat');
-            const isPropellerAds = cleanScript.includes('propellerads') || cleanScript.includes('_pop');
-            const isGoogleAdsense = cleanScript.includes('googlesyndication') || cleanScript.includes('adsbygoogle');
-            
-            let dimensions = { width: '100%', height: 'auto' };
-            
-            // Extract dimensions if available
-            if (cleanScript.includes('height') || cleanScript.includes('width')) {
-                const heightMatch = cleanScript.match(/height['"]?\s*:\s*['"]?(\d+)['"]?/);
-                const widthMatch = cleanScript.match(/width['"]?\s*:\s*['"]?(\d+)['"]?/);
-                
-                if (heightMatch) dimensions.height = heightMatch[1] + 'px';
-                if (widthMatch) dimensions.width = widthMatch[1] + 'px';
-            }
-            
-            // For Adsterra style scripts - ENHANCED FOR SECURITY
-            if (isAdsterra) {
-                const keyMatch = cleanScript.match(/['"]key['"]\s*:\s*['"]([^'"]+)['"]/);
-                const key = keyMatch ? keyMatch[1] : '';
-                
-                const wrapped = `
-                    <div class="adsterra-ad" style="width: ${dimensions.width}; height: ${dimensions.height}; margin: 0 auto;">
-                        <div id="adsterra-container-${Date.now()}"></div>
-                        <script>
-                            // Safety wrapper for ad execution
-                            (function() {
-                                try {
-                                    ${cleanScript}
-                                    if (typeof atOptions !== 'undefined') {
-                                        var container = document.getElementById('adsterra-container-${Date.now()}');
-                                        if (container) {
-                                            var iframe = document.createElement('iframe');
-                                            iframe.width = atOptions.width || 300;
-                                            iframe.height = atOptions.height || 250;
-                                            iframe.style.border = 'none';
-                                            iframe.style.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
-                                            iframe.sandbox = 'allow-scripts allow-same-origin allow-popups allow-forms';
-                                            iframe.src = 'about:blank';
-                                            container.appendChild(iframe);
-                                            
-                                            var script = document.createElement('script');
-                                            script.src = '//www.highperformanceformat.com/' + atOptions.key + '/invoke.js';
-                                            script.async = true;
-                                            document.body.appendChild(script);
-                                        }
-                                    }
-                                } catch(e) {
-                                    console.log('Ad loaded securely:', e);
-                                }
-                            })();
-                        <\/script>
-                    </div>
-                `;
-                return {
-                    wrapped: wrapped,
-                    format: 'adsterra',
-                    dimensions: dimensions
-                };
-            }
-            
-            // For general script tags - WITH SECURITY
-            if (cleanScript.includes('<script')) {
-                const wrapped = `
-                    <div class="script-ad" style="width: ${dimensions.width}; height: ${dimensions.height}; margin: 0 auto; display: flex; justify-content: center; align-items: center;">
-                        <div id="ad-script-container-${Date.now()}">
-                            ${cleanScript}
-                        </div>
-                    </div>
-                `;
-                return {
-                    wrapped: wrapped,
-                    format: 'script',
-                    dimensions: dimensions
-                };
-            }
-            
-            // Default: treat as HTML snippet
-            return {
-                wrapped: `<div class="custom-ad" style="width: 100%; min-height: 100px; display: flex; justify-content: center; align-items: center;">${cleanScript}</div>`,
-                format: 'custom',
-                dimensions: dimensions
-            };
-        }
-
-        // Update live preview - WITH ENHANCED IFRAME SECURITY
-        function updateLivePreview() {
+        // THE FIXED PREVIEW FUNCTION
+        function updatePreview() {
             const script = document.getElementById('campaignScript').value;
-            const preview = document.getElementById('livePreview');
-            const formatDetection = document.getElementById('formatDetection');
-            const detectedDimensions = document.getElementById('detectedDimensions');
-            const formatIndicators = document.getElementById('formatIndicators');
+            const iframe = document.getElementById('adPreviewFrame');
             
             if (!script.trim()) {
-                preview.innerHTML = '<p style="color: #999; font-size: 13px;">Paste your ad script above to see live preview</p>';
-                formatDetection.style.display = 'none';
+                alert('Paste a script first!');
                 return;
             }
+
+            // Detect format
+            let network = 'Custom';
+            let width = 'auto';
+            let height = 'auto';
             
-            try {
-                const wrapped = wrapAdScript(script, document.getElementById('campaignType').value);
-                
-                formatDetection.style.display = 'block';
-                
-                let indicators = '';
-                
-                switch(wrapped.format) {
-                    case 'adsterra':
-                        indicators = '<span class="ad-format-badge" style="background:#667eea; color:white;">Adsterra</span>';
-                        break;
-                    case 'script':
-                        indicators = '<span class="ad-format-badge" style="background:#27ae60; color:white;">JavaScript Ad</span>';
-                        break;
-                    default:
-                        indicators = '<span class="ad-format-badge" style="background:#9b59b6; color:white;">Custom</span>';
-                }
-                
-                indicators += ` <span class="ad-format-badge" style="background:#34495e; color:white;">${wrapped.dimensions.width} × ${wrapped.dimensions.height}</span>`;
-                
-                detectedDimensions.textContent = `${wrapped.dimensions.width} × ${wrapped.dimensions.height} (${wrapped.format})`;
-                formatIndicators.innerHTML = indicators;
-                
-                // Escape the wrapped script for iframe with enhanced security
-                const escapedScript = wrapped.wrapped.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
-                
-                preview.innerHTML = `
-                    <div style="width: 100%; min-height: 200px; display: flex; justify-content: center; align-items: center;">
-                        <iframe srcdoc="${escapedScript}" 
-                                sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-modals allow-popups-to-escape-sandbox" 
-                                style="width: 100%; min-height: 250px; border: none; background: white;"
-                                loading="lazy">
-                        </iframe>
-                    </div>
-                `;
-            } catch (e) {
-                preview.innerHTML = `<p style="color: #e74c3c; font-size: 13px;">Error rendering preview: ${e.message}</p>`;
+            if (script.includes('atOptions')) {
+                network = 'Adsterra';
+                const h = script.match(/height.*?(\d+)/);
+                const w = script.match(/width.*?(\d+)/);
+                if (h) height = h[1] + 'px';
+                if (w) width = w[1] + 'px';
             }
+
+            // Show badges
+            document.getElementById('networkBadge').textContent = network;
+            document.getElementById('sizeBadge').textContent = width + 'x' + height;
+            document.getElementById('formatBadges').style.display = 'block';
+
+            // Create a proper HTML document that will EXECUTE the script
+            const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+            background: #f5f7ff;
+            font-family: system-ui;
+        }
+        .ad-container {
+            width: ${width};
+            height: ${height};
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .debug-info {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 10px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="ad-container">
+        ${script}
+    </div>
+    <div class="debug-info">Preview Mode • ${network} • ${width}x${height}</div>
+</body>
+</html>
+`;
+
+            // Create a blob and load it in the iframe (THIS WORKS!)
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            iframe.src = url;
+            
+            // Clean up
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
         }
 
-        // Insert example Adsterra script
-        function insertExampleScript() {
-            document.getElementById('campaignScript').value = `<!-- Adsterra 300x250 Mobile Ad -->
+        // Insert example
+        function insertExample() {
+            document.getElementById('campaignScript').value = `<!-- Adsterra 300x250 Ad -->
+<div id="adsterra-container" style="width:300px;height:250px;margin:0 auto;"></div>
 <script type="text/javascript">
     atOptions = {
         'key' : '04ffba568e1f939f4f791d4fdb3a4666',
@@ -560,90 +357,73 @@
         'width' : 300,
         'params' : {}
     };
-<\/script>
-<script type="text/javascript" src="//www.highperformanceformat.com/04ffba568e1f939f4f791d4fdb3a4666/invoke.js"><\/script>`;
-            updateLivePreview();
-            detectAdFormat();
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/04ffba568e1f939f4f791d4fdb3a4666/invoke.js"></script>`;
+            updatePreview();
         }
 
-        function detectAdFormat() {
-            updateLivePreview();
-        }
-
-        function updateTotalCost() {
-            const views = parseInt(document.getElementById('requestedViews').value) || 0;
-            document.getElementById('totalCost').textContent = views;
-        }
-
-        // Handle form submission
+        // Handle form submit
         document.getElementById('campaignForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const user = getUserData();
-            const type = document.getElementById('campaignType').value;
-            const originalScript = document.getElementById('campaignScript').value;
-            const requestedViews = parseInt(document.getElementById('requestedViews').value);
-            const totalClients = parseInt(localStorage.getItem('skytube_totalClients')) || 2;
+            const user = getUser();
+            const script = document.getElementById('campaignScript').value;
+            const views = parseInt(document.getElementById('requestedViews').value);
+            const total = parseInt(localStorage.getItem('skytube_totalClients')) || 2;
 
-            if (!originalScript.trim()) {
-                alert('Please enter your ad script');
+            if (!script.trim()) {
+                alert('Enter script');
                 return;
             }
 
-            if (requestedViews > totalClients) {
-                alert(`Maximum views allowed is ${totalClients}`);
-                return;
-            }
-
-            if (requestedViews > user.coins) {
+            if (views > user.coins) {
                 alert('Insufficient coins');
                 return;
             }
 
-            // Wrap the script
-            const wrapped = wrapAdScript(originalScript, type);
+            if (views > total) {
+                alert('Max views: ' + total);
+                return;
+            }
 
-            // Create campaign object
+            // Save campaign
             const campaign = {
                 id: Date.now().toString(),
                 userId: user.id,
-                type: type,
-                originalScript: originalScript,
-                wrappedScript: wrapped.wrapped,
-                format: wrapped.format,
-                dimensions: wrapped.dimensions,
-                requestedViews: requestedViews,
+                type: document.getElementById('campaignType').value,
+                script: script,
+                requestedViews: views,
                 viewsCompleted: 0,
                 status: 'active',
                 createdAt: new Date().toISOString()
             };
 
-            // Save to localStorage
-            const existingCampaigns = JSON.parse(localStorage.getItem('skytube_campaigns') || '[]');
-            existingCampaigns.push(campaign);
-            localStorage.setItem('skytube_campaigns', JSON.stringify(existingCampaigns));
+            const campaigns = JSON.parse(localStorage.getItem('skytube_campaigns') || '[]');
+            campaigns.push(campaign);
+            localStorage.setItem('skytube_campaigns', JSON.stringify(campaigns));
 
-            // Update user coins
-            user.coins -= requestedViews;
+            // Update coins
+            user.coins -= views;
             localStorage.setItem('skytube_user', JSON.stringify(user));
 
-            alert('✅ Campaign launched successfully!');
+            alert('✅ Campaign launched!');
             window.location.href = 'index.html';
         });
 
-        // Initialize
-        checkDomain();
-        updateDisplays();
+        // Update cost
+        document.getElementById('requestedViews').addEventListener('input', function() {
+            document.getElementById('totalCost').textContent = this.value;
+        });
 
-        // Update total clients from parent if possible
-        try {
-            if (window.opener && window.opener.SKYTUBE_DB) {
-                const total = window.opener.getTotalClients();
-                localStorage.setItem('skytube_totalClients', total);
+        // Initialize
+        updateUI();
+        
+        // Auto-preview if there's script
+        setTimeout(() => {
+            if (document.getElementById('campaignScript').value) {
+                updatePreview();
             }
-        } catch(e) {
-            // Ignore cross-origin errors
-        }
+        }, 500);
     </script>
 </body>
 </html>
